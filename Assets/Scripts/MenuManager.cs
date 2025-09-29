@@ -4,9 +4,10 @@ public class MenuManager : MonoBehaviour
 {
     public static MenuManager Instance;
 
-    public int HighScore { get; set; }
+    public int HighScore { get; set; } = 0;
+    public string HighScorePlayerName { get; set; } = "Player";
 
-    private string playerName;
+    public string PlayerName { get; set; } = "Player";
 
     private void Awake()
     {
@@ -35,7 +36,7 @@ public class MenuManager : MonoBehaviour
     {
         SaveData data = new()
         {
-            PlayerName = playerName,
+            PlayerName = HighScorePlayerName,
             HighScore = HighScore
         };
 
@@ -52,7 +53,7 @@ public class MenuManager : MonoBehaviour
             string json = System.IO.File.ReadAllText(path);
             SaveData data = JsonUtility.FromJson<SaveData>(json);
 
-            playerName = data.PlayerName;
+            HighScorePlayerName = data.PlayerName;
             HighScore = data.HighScore;
         }
     }
